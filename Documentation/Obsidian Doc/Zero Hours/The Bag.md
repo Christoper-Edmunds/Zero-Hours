@@ -1,0 +1,1 @@
+THe bag will operate on a 3d grid system requiring you to find space for everything you want to place in it. THis limits you on what you can bring with you as well as providing a thought puzzle to avoiding things falling over ect. 
