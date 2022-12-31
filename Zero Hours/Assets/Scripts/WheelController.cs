@@ -8,15 +8,17 @@ public class WheelController : MonoBehaviour
     [SerializeField] WheelCollider frontWheel; 
     [SerializeField] WheelCollider backWheel;
 
-    //private Rigidbody bikeRB;
+    private Rigidbody bikeRB;
     
     public float acceleration = 500f;
     public float breakingForce = 300f;
-    public float maxTurnAngle = 15f;
+    public float maxTurnAngle = 25f;
 
     private float currentAcceleration = 0f;
     private float currentBreakForce = 0f;
     private float currentTurnAngle = 0f;
+
+    public float leanStrength = 0.2f;
 
     public Transform GameObject;
 
@@ -36,10 +38,38 @@ public class WheelController : MonoBehaviour
         frontWheel.brakeTorque = currentBreakForce;
         backWheel.brakeTorque = currentBreakForce;
 
-        // Handl;es Steering
+        // Handles Steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
         frontWheel.steerAngle = currentTurnAngle;
+        if (currentTurnAngle > 0.5f)
+        {
+            GameObject.Rotate(0 , 0 , leanStrength);
+        }
+        else if (currentTurnAngle < -0.5f)
+        {
+            GameObject.Rotate(0 , 0 , -leanStrength);
+        }
         
+        
+        float Rotation;
+        if(GameObject.eulerAngles.z <= 180f)
+        {
+            Rotation = GameObject.eulerAngles.z;
+        }
+        else
+        {
+            Rotation = GameObject.eulerAngles.z - 360f;
+        }
+        Debug.Log(Rotation);
+
+          if ( (Rotation > 0) && (currentTurnAngle == 0) )
+        {
+            GameObject.Rotate(0, 0 , -leanStrength);
+        }
+        else if ( (Rotation < -0) && (currentTurnAngle == 0) )
+        {
+            GameObject.Rotate(0 , 0 , leanStrength);
+        }  
 
     }
     
@@ -56,24 +86,5 @@ public class WheelController : MonoBehaviour
         
         //transform.Rotate()
 
-        float Rotation;
-        if(GameObject.eulerAngles.z <= 180f)
-        {
-            Rotation = GameObject.eulerAngles.z;
-        }
-        else
-        {
-            Rotation = GameObject.eulerAngles.z - 360f;
-        }
-        Debug.Log(Rotation);
-
-/*         if (Rotation > 10)
-        {
-            GameObject.Rotate(0, 0 , -10);
-        }
-        else if(Rotation < -10)
-        {
-            GameObject.Rotate(0 , 0 , 10);
-        } */
     }
 }

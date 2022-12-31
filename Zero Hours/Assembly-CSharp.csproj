@@ -42,6 +42,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BikeController.cs" />
      <Compile Include="Assets\Scripts\WheelController.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.2.1f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
