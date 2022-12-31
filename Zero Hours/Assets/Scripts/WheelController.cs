@@ -12,13 +12,13 @@ public class WheelController : MonoBehaviour
     
     public float acceleration = 500f;
     public float breakingForce = 300f;
-    public float maxTurnAngle = 25f;
+    public float maxTurnAngle = 40f;
 
     private float currentAcceleration = 0f;
     private float currentBreakForce = 0f;
     private float currentTurnAngle = 0f;
 
-    public float leanStrength = 0.2f;
+    public float leanStrength = 0.02f;
 
     public Transform GameObject;
 
@@ -41,14 +41,14 @@ public class WheelController : MonoBehaviour
         // Handles Steering
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
         frontWheel.steerAngle = currentTurnAngle;
-        if (currentTurnAngle > 0.5f)
+/*         if (currentTurnAngle > 0.6f)
         {
             GameObject.Rotate(0 , 0 , leanStrength);
         }
-        else if (currentTurnAngle < -0.5f)
+        else if (currentTurnAngle < -0.6f)
         {
             GameObject.Rotate(0 , 0 , -leanStrength);
-        }
+        } */
         
         
         float Rotation;
@@ -64,11 +64,11 @@ public class WheelController : MonoBehaviour
 
           if ( (Rotation > 0) && (currentTurnAngle == 0) )
         {
-            GameObject.Rotate(0, 0 , -leanStrength);
+            GameObject.Rotate(0, 0 , -leanStrength * 2);
         }
         else if ( (Rotation < -0) && (currentTurnAngle == 0) )
         {
-            GameObject.Rotate(0 , 0 , leanStrength);
+            GameObject.Rotate(0 , 0 , leanStrength * 2);
         }  
 
     }
